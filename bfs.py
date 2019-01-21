@@ -5,9 +5,10 @@ from multiprocessing import Queue
 # pillow
 from PIL import Image
 
-start = (400,984)
-end = (398,25)
-
+#start = (400,984)
+#end = (398,25)
+start = (10,7)
+end = (1768,1791)
 def iswhite(value):
     if value >= (180,180,180):
         return True
@@ -17,18 +18,12 @@ def getadjacent(n):
     return [(x-1,y),(x,y-1),(x+1,y),(x,y+1)]
 
 def BFS(start, end, pixels):
-
     queue = [[start]]
-     # Wrapping the start tuple in a list
-
     while queue:
-
         path = queue.pop(0)
         pixel = path[-1]
-
         if pixel == end:
             return path
-
         for adjacent in getadjacent(pixel):
             x,y = adjacent
             if iswhite(pixels[x,y]):
@@ -43,18 +38,18 @@ def BFS(start, end, pixels):
 if __name__ == '__main__':
 
     # invoke: python mazesolver.py <mazefile> <outputfile>[.jpg|.png|etc.]
-    base_img = Image.open('maze.png')
+    base_img = Image.open('maze_2.png')
     base_img = base_img.convert('RGB')
     base_pixels = base_img.load()
 
     path = BFS(start, end, base_pixels)
 
-    path_img = Image.open('maze.png')
+    path_img = Image.open('maze_2.png')
     path_pixels = path_img.load()
 
     for position in path:
         x,y = position
         path_pixels[x,y] = (255,0,0) # red
 
-    path_img.save('maze_done.jpg')
+    path_img.save('ans1.jpg')
 #/myscript.py path/to/img1 path/to/img2
