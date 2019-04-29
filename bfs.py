@@ -22,6 +22,7 @@ def BFS(start, end, pixels):
     while queue:
         path = queue.pop(0)
         pixel = path[-1]
+        print(pixel)
         if pixel == end:
             return path
         for adjacent in getadjacent(pixel):
@@ -51,5 +52,5 @@ if __name__ == '__main__':
         x,y = position
         path_pixels[x,y] = (255,0,0) # red
 
-    path_img.save('ans1.jpg')
+    path_img.save('green.jpg')
 #/myscript.py path/to/img1 path/to/img2
