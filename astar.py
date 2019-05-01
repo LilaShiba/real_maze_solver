@@ -4,17 +4,23 @@ import sys
 from multiprocessing import Queue
 # pillow
 from PIL import Image
+import heapq
 
 
 
 def a_star(start, end, matrix):
 
     parent = {}
-    unseenNodes = [start]
+    x,y = start
+    unseenNodes = [(0,x,y)]
+    cost = {}
+    heapq.heapify(unseenNodes)
 
     while unseenNodes:
-        minNode = unseenNodes.pop(0)
-        x,y = minNode
+        # unseenNodes = sorted(unseenNodes, key = lambda x: x[2])
+        minNode = heapq.heappop(unseenNodes)
+        #minNode = unseenNodes.pop(0)
+        _,x,y= minNode
 
         if (x,y) == end:
             return parent
@@ -24,9 +30,12 @@ def a_star(start, end, matrix):
         real_neighbors = ((x,y) for (x,y) in neighbors if matrix[x,y] > (120,120,120))
 
         for cx,cy in real_neighbors:
-            matrix[cx,cy] = (120,120,120)
-            unseenNodes.append((cx,cy))
-            parent[(cx,cy)] = (px,py)
+            dist = abs(end[0] - cx) + abs(end[1]-cy)
+            if (cx,cy) not in parent or dist < cost[cx,cy]:
+                matrix[cx,cy] = (120,120,120)
+                unseenNodes.append((dist,cx,cy))
+                parent[(cx,cy)] = (px,py)
+                cost[(cx,cy)] = dist
 
 
 # run program
