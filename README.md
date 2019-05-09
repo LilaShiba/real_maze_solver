@@ -8,8 +8,8 @@ Teaching tool for students to visualize different algorithms on graphs
 
 Have students play around with heuristic and distance calculations to see how a path is formed
 
-## Astar w Euclidean
-![astar](https://github.com/kyle1james/real_maze_solver/blob/master/euc_maze_astar1_pic.jpg)
+## Astar
+![astar](https://github.com/kyle1james/real_maze_solver/blob/master/maze_astar1_pic.jpg)
 
 ## BFS
 ![bfs](https://github.com/kyle1james/real_maze_solver/blob/master/maze1_bfs.jpg)
